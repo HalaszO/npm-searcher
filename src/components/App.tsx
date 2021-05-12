@@ -1,14 +1,17 @@
 import { Provider } from "react-redux";
 import { store } from "../state";
 import RepoSearch from "./RepoSearch";
+import { Typography, Container } from "@material-ui/core";
 
 const App = () => {
   return (
     <Provider store={store}>
-      <div>
-        <h1>Search for a package</h1>
+      <Container maxWidth="md">
+        <Typography variant="h3" gutterBottom>
+          Search for a package
+        </Typography>
         <RepoSearch />
-      </div>
+      </Container>
     </Provider>
   );
 };

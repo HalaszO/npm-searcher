@@ -1,35 +1,55 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import {
+  Button,
+  Input,
+  Typography,
+  CircularProgress,
+} from "@material-ui/core/";
 import { useActions, useTypedSelector } from "../hooks";
+import RepoList from "./RepoList";
 
 const RepoSearch: React.FC = () => {
   const [term, setTerm] = useState("");
-  const dispatch = useDispatch();
   const { searchRepos } = useActions();
   const { data, error, loading } = useTypedSelector((state) => state.repos);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    console.log("fock off");
     event.preventDefault();
 
     //dispatch(actionCreators.searchRepos(term));
     searchRepos(term);
   };
 
-  const repoList = data.map((name) => <div key={name}>{name}</div>);
-
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <input
+        <Input
           value={term}
           onChange={(e) => setTerm(e.target.value)}
           placeholder="Search term..."
+          autoFocus={true}
         />
-        <button>Search</button>
+        <Button
+          className="submit-btn"
+          type="submit"
+          variant="contained"
+          color="primary"
+        >
+          Search
+        </Button>
       </form>
-      {error && <h3>{error}</h3>}
-      {loading && <h3>Loading...</h3>}
-      {!error && !loading && repoList}
+      {error && (
+        <Typography variant="h4" gutterBottom>
+          {error}
+        </Typography>
+      )}
+      {loading && (
+        <Typography variant="h4" gutterBottom>
+          <CircularProgress className="progress" />
+        </Typography>
+      )}
+      {!error && !loading && <RepoList data={data} />}
     </div>
   );
 };
