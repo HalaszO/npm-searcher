@@ -1,4 +1,4 @@
-#NPM-searcher
+# NPM-searcher
 This is a small project using React-Redux to search for npm package names
 
 ## Available Scripts
