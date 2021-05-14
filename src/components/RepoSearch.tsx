@@ -14,7 +14,6 @@ const RepoSearch: React.FC = () => {
   const { data, error, loading } = useTypedSelector((state) => state.repos);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    console.log("fock off");
     event.preventDefault();
 
     //dispatch(actionCreators.searchRepos(term));
